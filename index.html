@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZONE BREACH</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Start Screen -->
+    <div id="startScreen">
+        <h1>ZONE BREACH</h1>
+        <p>Tactical Urban Combat Simulation</p>
+        <div class="controls">
+            <p><span>WASD</span> - Move | <span>SHIFT</span> - Sprint | <span>C</span> - Crouch | <span>SPACE</span> - Jump</p>
+            <p><span>MOUSE</span> - Look | <span>CLICK</span> - Fire | <span>RIGHT CLICK</span> - Zoom (Sniper)</p>
+            <p><span>1/2/3</span> - Switch Weapons | <span>R</span> - Reload</p>
+        </div>
+        <p style="margin-top: 40px; color: #666;">Click anywhere to start mission</p>
+    </div>
+    
+    <!-- HUD -->
+    <div id="hud">
+        <div id="healthContainer">
+            <div id="healthBar"></div>
+            <div id="healthText">100/100</div>
+        </div>
+        
+        <div id="waveInfo">
+            <div id="waveNumber">WAVE 1</div>
+            <div id="enemiesRemaining">Enemies: 5</div>
+        </div>
+        
+        <div id="ammoDisplay">
+            <div id="weaponName">ASSAULT RIFLE</div>
+            <div id="ammoCount"><span id="currentAmmo">30</span> / <span id="reserveAmmo">90</span></div>
+        </div>
+        
+        <div id="reloadIndicator">RELOADING...</div>
+        
+        <canvas id="minimap"></canvas>
+        
+        <div id="crosshair"></div>
+        <div id="zoomOverlay"></div>
+        
+        <div id="killFeed"></div>
+        
+        <div id="damageVignette"></div>
+    </div>
+    
+    <!-- Game Over Screens -->
+    <div id="missionFailed" class="gameOverScreen">
+        <h2>MISSION FAILED</h2>
+        <p id="finalStatsFail">Kills: 0 | Wave: 1</p>
+        <button onclick="location.reload()">RESTART MISSION</button>
+    </div>
+    
+    <div id="missionComplete" class="gameOverScreen">
+        <h2>MISSION COMPLETE</h2>
+        <p>All waves cleared successfully!</p>
+        <p id="finalStatsWin">Total Kills: 0</p>
+        <button onclick="location.reload()">PLAY AGAIN</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

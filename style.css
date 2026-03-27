@@ -1,0 +1,298 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    background: #000;
+    font-family: 'Courier New', monospace;
+    user-select: none;
+}
+
+#gameCanvas {
+    display: block;
+}
+
+/* Start Screen */
+#startScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+#startScreen h1 {
+    font-size: 72px;
+    color: #ff3333;
+    text-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000;
+    letter-spacing: 8px;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+#startScreen p {
+    color: #888;
+    font-size: 18px;
+    margin: 10px;
+}
+
+#startScreen .controls {
+    margin-top: 30px;
+    color: #aaa;
+    text-align: center;
+    line-height: 1.8;
+}
+
+#startScreen .controls span {
+    color: #ff3333;
+    font-weight: bold;
+}
+
+/* HUD */
+#hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: none;
+}
+
+/* Health Bar */
+#healthContainer {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 200px;
+    height: 30px;
+    background: rgba(0,0,0,0.7);
+    border: 2px solid #333;
+}
+
+#healthBar {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff0000, #ff6600);
+    transition: width 0.2s;
+}
+
+#healthText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Wave Info */
+#waveInfo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    text-align: right;
+    color: white;
+}
+
+#waveInfo div {
+    margin: 5px 0;
+    text-shadow: 0 0 10px rgba(0,0,0,0.8);
+}
+
+#waveNumber {
+    font-size: 24px;
+    color: #ff3333;
+}
+
+/* Ammo Display */
+#ammoDisplay {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+}
+
+#weaponName {
+    font-size: 18px;
+    color: #aaa;
+    margin-bottom: 5px;
+}
+
+#ammoCount {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+#ammoCount span {
+    color: #ff3333;
+}
+
+/* Minimap */
+#minimap {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 120px;
+    height: 120px;
+    background: rgba(0,0,0,0.8);
+    border: 2px solid #444;
+}
+
+/* Crosshair */
+#crosshair {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+}
+
+#crosshair::before, #crosshair::after {
+    content: '';
+    position: absolute;
+    background: rgba(255,255,255,0.8);
+}
+
+#crosshair::before {
+    width: 2px;
+    height: 20px;
+    left: 9px;
+    top: 0;
+}
+
+#crosshair::after {
+    width: 20px;
+    height: 2px;
+    left: 0;
+    top: 9px;
+}
+
+#crosshair.dot {
+    width: 4px;
+    height: 4px;
+    background: #ff0000;
+    border-radius: 50%;
+}
+
+/* Kill Feed */
+#killFeed {
+    position: absolute;
+    top: 100px;
+    right: 20px;
+    text-align: right;
+}
+
+.killMessage {
+    color: #ffaa00;
+    font-size: 14px;
+    margin: 2px 0;
+    opacity: 1;
+    transition: opacity 2s;
+    text-shadow: 0 0 5px rgba(0,0,0,0.8);
+}
+
+/* Damage Vignette */
+#damageVignette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 50%, rgba(255,0,0,0.5) 100%);
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+}
+
+/* Game Over Screens */
+.gameOverScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.gameOverScreen h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.gameOverScreen p {
+    color: #aaa;
+    font-size: 20px;
+    margin: 10px;
+}
+
+.gameOverScreen button {
+    margin-top: 30px;
+    padding: 15px 40px;
+    font-size: 18px;
+    background: #ff3333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    pointer-events: auto;
+}
+
+.gameOverScreen button:hover {
+    background: #ff5555;
+}
+
+#missionFailed h2 {
+    color: #ff3333;
+}
+
+#missionComplete h2 {
+    color: #33ff33;
+}
+
+/* Reload indicator */
+#reloadIndicator {
+    position: absolute;
+    bottom: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ffaa00;
+    font-size: 20px;
+    display: none;
+}
+
+/* Zoom overlay */
+#zoomOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 50px solid rgba(0,0,0,0.3);
+    display: none;
+    pointer-events: none;
+}
